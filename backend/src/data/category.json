@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "default",
+    "color": 1
+  },
+  {
+    "id": 2,
+    "name": "work",
+    "color": 2
+  },
+  {
+    "id": 3,
+    "name": "personal",
+    "color": 3
+  }
+]

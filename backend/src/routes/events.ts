@@ -8,12 +8,13 @@ router.use(bodyParser.json());
 router.get("/", (req, res) => {
   let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
 
-  const fromQuery: any = req.query["from"];
-  const dateFrom = createDateToCompare(fromQuery);
-  const toQuery: any = req.query["to"];
-  const dateTo = createDateToCompare(toQuery);
-
-  if (req.query["from"] !== undefined && req.query["to"] === undefined) {
+  if (
+    req.query["from"] !== undefined &&
+    req.query["to"] === undefined &&
+    req.query["category"] === undefined
+  ) {
+    const fromQuery: any = req.query["from"];
+    const dateFrom = createDateToCompare(fromQuery);
     if (req.query["from"] !== "now") {
       events = events.filter(
         (event: any) =>
@@ -30,6 +31,10 @@ router.get("/", (req, res) => {
   }
 
   if (req.query["from"] !== undefined && req.query["to"] !== undefined) {
+    const fromQuery: any = req.query["from"];
+    const dateFrom = createDateToCompare(fromQuery);
+    const toQuery: any = req.query["to"];
+    const dateTo = createDateToCompare(toQuery);
     if (req.query["from"] !== "now") {
       events = events.filter(
         (event: any) =>
@@ -45,6 +50,34 @@ router.get("/", (req, res) => {
             new Date() &&
           new Date(event.date.year, event.date.month - 1, event.date.day + 1) <
             dateTo
+      );
+    }
+  }
+  if (req.query["category"] !== undefined && req.query["from"] !== undefined) {
+    const fromQuery: any = req.query["from"];
+    const dateFrom = createDateToCompare(fromQuery);
+    console.log(dateFrom);
+    let categoryQuery = req.query["category"];
+    if (categoryQuery === "work") {
+      events = events.filter(
+        (event: any) =>
+          event.category === 2 &&
+          new Date(event.date.year, event.date.month - 1, event.date.day + 1) >=
+            dateFrom
+      );
+    } else if (categoryQuery === "personal") {
+      events = events.filter(
+        (event: any) =>
+          event.category === 3 &&
+          new Date(event.date.year, event.date.month - 1, event.date.day + 1) >=
+            dateFrom
+      );
+    } else {
+      events = events.filter(
+        (event: any) =>
+          event.category === 1 &&
+          new Date(event.date.year, event.date.month - 1, event.date.day + 1) >=
+            dateFrom
       );
     }
   }
@@ -100,11 +133,9 @@ router.patch("/:id", (req, res) => {
   const newData = req.body;
   const url = "./src/data/event.json";
   let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
-  
+
   events = events.map((oldEvent: any) => {
-    return oldEvent.id === id
-      ? { ...oldEvent, ...newData }
-      : oldEvent;
+    return oldEvent.id === id ? { ...oldEvent, ...newData } : oldEvent;
   });
 
   fs.writeFile(url, JSON.stringify(events), (e) => {});
