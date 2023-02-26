@@ -100,28 +100,13 @@ router.patch("/:id", (req, res) => {
   const newData = req.body;
   const url = "./src/data/event.json";
   let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
-  console.log(newData.name);
-  if (newData.name !== undefined) {
-    events = events.map((oldEvent: any) => {
-      return oldEvent.id === id
-        ? { ...oldEvent, name: newData.name }
-        : oldEvent;
-    });
-  }
-  if (newData.date !== undefined) {
-    events = events.map((oldEvent: any) => {
-      return oldEvent.id === id
-        ? { ...oldEvent, date: newData.date }
-        : oldEvent;
-    });
-  }
-  if (newData.category !== undefined) {
-    events = events.map((oldEvent: any) => {
-      return oldEvent.id === id
-        ? { ...oldEvent, category: newData.category }
-        : oldEvent;
-    });
-  }
+  
+  events = events.map((oldEvent: any) => {
+    return oldEvent.id === id
+      ? { ...oldEvent, ...newData }
+      : oldEvent;
+  });
+
   fs.writeFile(url, JSON.stringify(events), (e) => {});
 
   res.send("done");
