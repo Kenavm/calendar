@@ -69,9 +69,9 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const event = req.body;
-  let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
   const url = "./src/data/event.json";
-  console.log(events);
+  let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
+
   events.push(event);
   fs.writeFile(url, JSON.stringify(events), (e) => {
     console.error(e);
@@ -80,19 +80,59 @@ router.post("/", (req, res) => {
   res.send("done");
 });
 
-router.put("/:id", (req, res) => {});
+router.put("/:id", (req, res) => {
+  const newEvent = req.body;
+  const id = parseInt(req.params.id);
+  const url = "./src/data/event.json";
+  let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
 
-router.patch("/:id", (req, res) => {});
+  events = events.map((e: any) => {
+    return e.id === id ? newEvent : e;
+  });
+  fs.writeFile(url, JSON.stringify(events), (e) => {
+    console.error(e);
+  });
+  res.send("done");
+});
+
+router.patch("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const newData = req.body;
+  const url = "./src/data/event.json";
+  let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
+  console.log(newData.name);
+  if (newData.name !== undefined) {
+    events = events.map((oldEvent: any) => {
+      return oldEvent.id === id
+        ? { ...oldEvent, name: newData.name }
+        : oldEvent;
+    });
+  }
+  if (newData.date !== undefined) {
+    events = events.map((oldEvent: any) => {
+      return oldEvent.id === id
+        ? { ...oldEvent, date: newData.date }
+        : oldEvent;
+    });
+  }
+  if (newData.category !== undefined) {
+    events = events.map((oldEvent: any) => {
+      return oldEvent.id === id
+        ? { ...oldEvent, category: newData.category }
+        : oldEvent;
+    });
+  }
+  fs.writeFile(url, JSON.stringify(events), (e) => {});
+
+  res.send("done");
+});
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  console.log(id)
   let events = JSON.parse(fs.readFileSync("./src/data/event.json", "utf-8"));
   const url = "./src/data/event.json";
   events = events.filter((e: any) => e.id.toString() !== id);
-  fs.writeFile(url, JSON.stringify(events), (e) => {
-
-  });
+  fs.writeFile(url, JSON.stringify(events), (e) => {});
 
   res.send("done");
 });
