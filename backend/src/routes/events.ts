@@ -82,8 +82,6 @@ router.get("/", (req, res) => {
     }
   }
 
-  // /api/events?category=work&from=2023-03-01
-
   res.json(events);
 });
 
