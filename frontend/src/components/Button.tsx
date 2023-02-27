@@ -1,7 +1,15 @@
-import { MouseEventHandler } from "react"
+import { MouseEventHandler } from "react";
 
-function Button(props: {name: string, className: string, onClick: MouseEventHandler }) {
-    return <button onClick={props.onClick} className={props.className}>{props.name}</button>
+function Button(props: {
+  name: string;
+  className: string;
+  onClick: Function;
+}) {
+  return (
+    <button onClick={props.onClick()} className={props.className}>
+      {props.name}
+    </button>
+  );
 }
 
-export default Button
+export default Button;

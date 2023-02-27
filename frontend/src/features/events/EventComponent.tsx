@@ -1,4 +1,3 @@
-import Category from '../../types/Category'
 import Text from '../../components/Text'
 import './EventComponent.css'
 function Event(props: {name: string, hour: number, minute: number, category: string}) {
