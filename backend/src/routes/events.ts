@@ -153,7 +153,7 @@ router.patch("/:id", (req, res) => {
     fs.readFileSync("./src/data/event.json", "utf-8")
   );
 
-  events = events.map((oldEvent: any) => {
+  events = events.map((oldEvent: Event) => {
     return oldEvent.id === id ? { ...oldEvent, ...newData } : oldEvent;
   });
 
