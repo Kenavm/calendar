@@ -1,12 +1,14 @@
-import { useState } from 'react'
 import './App.css'
+import Calendar from './features/calendar/Calendar'
+import EventList from './features/eventList/EventList'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <div className="App">
-     
+      <Calendar />
+     <EventList />
     </div>
   )
 }
