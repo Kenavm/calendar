@@ -32,3 +32,17 @@
     justify-content: center;
     align-items: center;
   }
+
+  .addButton {
+    background-color: blanchedalmond;
+  }
+
+  .save {
+    background-color: greenyellow;
+    margin: 10px;
+  }
+
+  .cancel {
+    background-color: lightgrey;
+    margin: 10px;
+  }

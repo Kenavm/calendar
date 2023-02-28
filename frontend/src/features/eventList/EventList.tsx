@@ -3,7 +3,7 @@ import Event from "../../types/Event";
 import EventComponent from "../events/EventComponent";
 import fetchEvents from "../../api/fetchEvents";
 import Button from "../../components/Button";
-import CreateEvent from "./CreateEvent";
+import CreateEvent from "../createNewEvent/CreateEvent";
 import fetchCategories from '../../api/fetchCategories'
 
 function EventList() {
@@ -31,7 +31,7 @@ function EventList() {
     <div>
       <Button
         name={"Create Event"}
-        className={"addButon"}
+        className={"addButton"}
         onClick={() => setOpenModal(true)}
       />
       <div className="createEvent">

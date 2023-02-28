@@ -3,13 +3,13 @@ import "./CreateNewEventForm.css";
 import Label from "../../components/Label";
 import Select from "../../components/Select";
 
-function Form(props: {
+function CreateNewEventForm(props: {
   formClassName: string;
   inputClassName: string;
   typeText: string;
   typeSelect: string;
   typeDatepicker: string;
-  labelName:string;
+  labelName: string;
   labelCategory: string;
   labelDate: string;
   onSetName: Function;
@@ -18,9 +18,10 @@ function Form(props: {
   name: string;
   date: string;
   category: string;
-  categoryNames: Array<string>
+  categoryNames: Array<string>;
 }) {
   function handleDate(dateString: string) {
+    console.log(dateString);
     const dateObject = new Date(dateString);
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
@@ -40,28 +41,27 @@ function Form(props: {
 
   return (
     <form className={props.formClassName}>
-      <Label text={props.labelName}/>
+      <Label text={props.labelName} />
       <Input
         type={props.typeText}
         className={props.inputClassName}
         value={props.name}
         onChange={(e) => props.onSetName(e.target.value)}
       />
-      <Label text={props.labelCategory}/>
+      <Label text={props.labelCategory} />
       <Select
         values={props.categoryNames}
         value={props.category}
         onChange={(e) => props.onSetCategory(e.target.value)}
       />
-      <Label text={props.labelDate}/>
+      <Label text={props.labelDate} />
       <Input
         type={props.typeDatepicker}
         className={props.inputClassName}
         onChange={(e) => handleDate(e.target.value)}
-
       />
     </form>
   );
 }
 
-export default Form;
+export default CreateNewEventForm;
