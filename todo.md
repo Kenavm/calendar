@@ -1,5 +1,5 @@
-form-validierung einbauen
-calendar einbauen
-edit event einbauen
-add category einbauen
-interface
+add form-validierung
+add calendar
+add edit event
+add category 
+add props interface
