@@ -15,7 +15,7 @@ type Event = {
     hour: number;
     minute: number;
   };
-  category: number;
+  category: number | string;
 };
 
 router.get("/", (req, res) => {
@@ -119,7 +119,13 @@ router.post("/", (req, res) => {
   let events: Array<Event> = JSON.parse(
     fs.readFileSync("./src/data/event.json", "utf-8")
   );
-
+    if(event.category === "work") {
+      event.category = 2;
+    } else if (event.category === "personal") {
+      event.category = 3;
+    } else {
+      event.category = 1;
+    }
   events = [...events, event];
   fs.writeFile(url, JSON.stringify(events), (e) => {
     console.error(e);

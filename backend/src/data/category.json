@@ -2,16 +2,16 @@
   {
     "id": 1,
     "name": "default",
-    "color": 1
+    "color": "white"
   },
   {
     "id": 2,
     "name": "work",
-    "color": 2
+    "color": "lightred"
   },
   {
     "id": 3,
     "name": "personal",
-    "color": 3
+    "color": "lightblue"
   }
 ]
