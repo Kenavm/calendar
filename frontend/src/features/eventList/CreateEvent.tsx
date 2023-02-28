@@ -5,10 +5,6 @@ import Header from "../../components/Header";
 import "./CreateEvent.css";
 
 function CreateEvent(props: {
-  formClassName: string;
-  inputClassName: string;
-  typeText: string;
-  typeDatepicker: string;
   headerText: string;
   saveButtonName: string;
   cancelButtonName: string;
@@ -21,7 +17,10 @@ function CreateEvent(props: {
   const [date, setDate] = useState<string>("");
   const [category, setCategory] = useState<string>("");
 
-  function createEvent(name: string, date: string, category: string) {
+  function createEvent(name: string, date: {}, category: string) {
+    
+    console.log(name)
+    console.log(date)
     const event = {
       id: Math.floor(Math.random() * 10000),
       name: name,
@@ -42,10 +41,10 @@ function CreateEvent(props: {
           </div>
           <div className="body">
             <Form
-              formClassName={props.formClassName}
-              inputClassName={props.inputClassName}
-              typeText={props.typeText}
-              typeDatepicker={props.typeDatepicker}
+              formClassName={"createEvent"}
+              inputClassName={"input"}
+              typeText={"text"}
+              typeDatepicker={"datetime-local"}
               onSetName={setName}
               onSetDate={setDate}
               onSetCategory={setCategory}

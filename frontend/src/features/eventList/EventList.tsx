@@ -28,10 +28,6 @@ function EventList() {
       <div className="createEvent">
         {openModal && (
           <CreateEvent
-            formClassName={"createEvent"}
-            inputClassName={"input"}
-            typeText={"text"}
-            typeDatepicker={"date"}
             headerText={"New Event"}
             saveButtonName={"Save"}
             cancelButtonName={"Cancel"}
