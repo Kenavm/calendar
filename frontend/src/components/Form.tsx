@@ -8,6 +8,9 @@ function Form(props: {
   onSetName: Function;
   onSetDate: Function;
   onSetCategory: Function;
+  name:string;
+  date: string;
+  category:string
 }) {
 
   return (
@@ -15,6 +18,7 @@ function Form(props: {
       <Input
         type={props.typeText}
         className={props.inputClassName}
+      
         onChange={(e: any) => props.onSetName(e.target.value)}
       />
       <Input

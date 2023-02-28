@@ -3,10 +3,10 @@ import { MouseEventHandler } from "react";
 function Button(props: {
   name: string;
   className: string;
-  onClick: Function;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <button onClick={props.onClick()} className={props.className}>
+    <button onClick={props.onClick} className={props.className}>
       {props.name}
     </button>
   );

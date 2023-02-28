@@ -8,36 +8,16 @@ import CreateEvent from "./CreateEvent";
 function EventList() {
   const [events, setEvents] = useState<Array<Event>>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
-
+ 
   useEffect(() => {
     async function loadEventsData() {
       setEvents(await fetchEvents());
     }
+
     loadEventsData();
   }, []);
 
-  function createEvent(
-    name: string,
-    date: {
-      year: number;
-      month: number;
-      day: number;
-      hour: number;
-      minute: number;
-    },
-    category: number
-  ) {
-    let event = {
-      id: Math.floor(Math.random() * 10000),
-      name: name,
-      date: date,
-      category: category,
-    };
-
-    setEvents([...events, event]);
-    setOpenModal(false);
-  }
-
+ 
   return (
     <div>
       <Button
@@ -51,13 +31,14 @@ function EventList() {
             formClassName={"createEvent"}
             inputClassName={"input"}
             typeText={"text"}
-            typeDatepicker={"datepicker"}
+            typeDatepicker={"date"}
             headerText={"New Event"}
             saveButtonName={"Save"}
             cancelButtonName={"Cancel"}
             buttonClassName={"button"}
-            onCreateEvent={createEvent}
+            onSetEvents={setEvents}
             onCloseWindow={setOpenModal}
+            events={events}
           />
         )}
       </div>
