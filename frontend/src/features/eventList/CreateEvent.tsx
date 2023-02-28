@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Button from "../../components/Button";
-import Form from "../../components/Form";
+import Form from "./CreateNewEventForm";
 import Header from "../../components/Header";
 import "./CreateEvent.css";
+import postEvent from "../../api/postEvents";
 
 function CreateEvent(props: {
   headerText: string;
@@ -12,23 +13,22 @@ function CreateEvent(props: {
   onSetEvents: Function;
   onCloseWindow: Function;
   events: any;
+  categoryNames: Array<string>;
 }) {
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [category, setCategory] = useState<string>("");
 
   function createEvent(name: string, date: {}, category: string) {
-    
-    console.log(name)
-    console.log(date)
     const event = {
       id: Math.floor(Math.random() * 10000),
       name: name,
       date: date,
       category: category,
     };
-
     props.onSetEvents([...props.events, event]);
+    postEvent(event);
+
     props.onCloseWindow(false);
   }
 
@@ -44,13 +44,18 @@ function CreateEvent(props: {
               formClassName={"createEvent"}
               inputClassName={"input"}
               typeText={"text"}
+              typeSelect={"select"}
               typeDatepicker={"datetime-local"}
+              labelName={"Name of Event: "}
+              labelCategory={"Category: "}
+              labelDate={"When: "}
               onSetName={setName}
               onSetDate={setDate}
               onSetCategory={setCategory}
               name={name}
               date={date}
               category={category}
+              categoryNames={props.categoryNames}
             />
           </div>
           <div className="footer">

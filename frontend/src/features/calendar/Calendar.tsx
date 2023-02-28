@@ -11,8 +11,6 @@ function Calendar() {
         }
         loadCalendarData();
     }, [])
-
-    console.log(calendar)
     return(<div>
         
     </div>)

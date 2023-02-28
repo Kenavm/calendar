@@ -4,9 +4,11 @@ import EventComponent from "../events/EventComponent";
 import fetchEvents from "../../api/fetchEvents";
 import Button from "../../components/Button";
 import CreateEvent from "./CreateEvent";
+import fetchCategories from '../../api/fetchCategories'
 
 function EventList() {
   const [events, setEvents] = useState<Array<Event>>([]);
+  const [categories, setCategories] = useState<Array<Event>>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
  
   useEffect(() => {
@@ -17,7 +19,14 @@ function EventList() {
     loadEventsData();
   }, []);
 
- 
+  useEffect(() => {
+    async function loadCategoryData() {
+      setCategories(await fetchCategories());
+    }
+
+    loadCategoryData();
+  }, []);
+
   return (
     <div>
       <Button
@@ -35,6 +44,7 @@ function EventList() {
             onSetEvents={setEvents}
             onCloseWindow={setOpenModal}
             events={events}
+            categoryNames={categories.map(category => category.name)}
           />
         )}
       </div>
@@ -46,7 +56,7 @@ function EventList() {
               name={event.name}
               hour={event.date.hour}
               minute={event.date.minute}
-              category={"work"}
+              category={event.category}
             />
           );
         })}
