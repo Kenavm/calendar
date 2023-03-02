@@ -21,7 +21,7 @@ function CreateNewEventForm(props: {
   categoryNames: Array<string>;
 }) {
   function handleDate(dateString: string) {
-    console.log(dateString);
+  
     const dateObject = new Date(dateString);
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;

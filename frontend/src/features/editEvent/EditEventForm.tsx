@@ -15,13 +15,13 @@ function EditEventForm(props: {
   onSetUpdatedName:Function
   onSetUpdatedDate: Function
   onSetUpdatedCategory: Function;
-  nameOfEventToEdit: string;
-  dateOfEventToEdit: string;
-  categoryOfEventToEdit: string;
   categoryNames: Array<string>;
+  updatedName:string;
+  updatedDate:string;
+  updatedCategory: string;
 }) {
   function handleDate(dateString: string) {
-    console.log(dateString);
+  
     const dateObject = new Date(dateString);
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
@@ -38,26 +38,27 @@ function EditEventForm(props: {
     };
     props.onSetUpdatedDate(date);
   }
-
+console.log(props.updatedDate.toString())
   return (
     <form className={props.formClassName}>
       <Label text={props.labelName} />
       <Input
         type={props.typeText}
         className={props.inputClassName}
-        value={props.nameOfEventToEdit}
+        value={props.updatedName}
         onChange={(e) => props.onSetUpdatedName(e.target.value)}
       />
       <Label text={props.labelCategory} />
       <Select
         values={props.categoryNames}
-        value={props.categoryOfEventToEdit}
+        value={props.updatedCategory}
         onChange={(e) => props.onSetUpdatedCategory(e.target.value)}
       />
       <Label text={props.labelDate} />
       <Input
         type={props.typeDatepicker}
         className={props.inputClassName}
+        value={props.updatedDate}
         onChange={(e) => handleDate(e.target.value)}
       />
     </form>

@@ -9,6 +9,8 @@ function EventComponent(props: {
   category: number;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }) {
+  console.log(props.hour)
+  console.log(props.minute)
   return (
     <div
       className={props.category === 2 ? "work" : "personal"}

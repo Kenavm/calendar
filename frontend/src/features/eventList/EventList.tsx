@@ -32,6 +32,11 @@ function EventList() {
     loadCategoryData();
   }, []);
 
+  function handleClick(id: number) {
+    setEventToEdit(events.find((event) => event.id === id));
+    setOpenEditEventModal(true);
+  }
+
   return (
     <div>
       <Button
@@ -74,18 +79,26 @@ function EventList() {
             headerText={"Edit Event"}
             nameOfEventToEdit={eventToEdit.name}
             categoryOfEventToEdit={eventToEdit.category}
-            dateOfEventToEdit={eventToEdit.date}
+            dateOfEventToEdit={
+              new Date(
+                eventToEdit.date.year,
+                eventToEdit.date.month,
+                eventToEdit?.date.day,
+                eventToEdit?.date.hour,
+                eventToEdit?.date.minute
+              )
+            }
             categoryNames={categories.map((category) => category.name)}
             onCloseWindow={setOpenEditEventModal}
+            onSetEvents={setEvents}
+            events={events}
+            id={eventToEdit.id}
           />
         )}
       </div>
     </div>
   );
-  function handleClick(id: number) {
-    setEventToEdit(events.find((event) => event.id === id));
-    setOpenEditEventModal(true);
-  }
+
 }
 
 export default EventList;
