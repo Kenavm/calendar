@@ -34,6 +34,7 @@ function EventList() {
     loadEventsData();
   }, []);
 
+
   useEffect(() => {
     async function loadCategoryData() {
       setCategories(await fetchCategories());

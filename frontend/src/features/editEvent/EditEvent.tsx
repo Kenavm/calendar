@@ -5,7 +5,7 @@ import EditEventForm from "./EditEventForm";
 import "./EditEvent.css";
 import moment from "moment";
 import patchEvent from "../../api/patchEvent";
-import Event from '../../types/Event'
+import Event from "../../types/Event";
 import putEvent from "../../api/putEvent";
 
 function EditEvent(props: {
@@ -27,33 +27,47 @@ function EditEvent(props: {
     props.categoryOfEventToEdit === 2 ? "work" : "personal"
   );
 
-  function editEvent(
-    updatedName: string,
-    updatedDate: {},
-    updatedCategory: string
-  ) {
+  function editEvent() {
+    let eventsWithNewData: Array<Event>;
+
     if (updatedDate === props.dateOfEventToEdit) {
       const newData = {
         name: updatedName,
         category: updatedCategory === "work" ? 2 : 3,
       };
+      
       patchEvent(newData, props.id);
+   
+      eventsWithNewData = props.events.map((event) =>
+        event.id === props.id ? { ...event, newData } : event
+      );
+      console.log(eventsWithNewData)
+  
+      props.onSetEvents(eventsWithNewData);
       props.onCloseWindow(false);
     } else {
-        props.events.map((event) => {
-          if (props.id === event.id) {
-            return (event = {
-              id: props.id,
-              name: updatedName,
-              date: updatedDate,
-              category: updatedCategory === "work" ? 2 : 3,
-            });
-          }
-        })
- 
-
-       putEvent(event, event.id);
-
+      let eventsWithNewData = props.events.map((event) => {
+        if (props.id === event.id) {
+          return {
+            event,
+            id: props.id,
+            name: updatedName,
+            date: updatedDate,
+            category: updatedCategory === "work" ? 2 : 3,
+          };
+        }
+      });
+      putEvent(
+        {
+          id: props.id,
+          name: updatedName,
+          date: updatedDate,
+          category: updatedCategory === "work" ? 2 : 3,
+        },
+        props.id
+      );
+      console.log(eventsWithNewData)
+      props.onSetEvents(eventsWithNewData);
       props.onCloseWindow(false);
     }
   }
@@ -85,7 +99,7 @@ function EditEvent(props: {
         <Button
           name={"Update"}
           className={"update"}
-          onClick={() => editEvent(updatedName, updatedDate, updatedCategory)}
+          onClick={() => editEvent()}
         />
         <Button
           name={"Cancel"}
