@@ -14,6 +14,7 @@ function EventList() {
   const [openCreateEventModal, setOpenCreateEventModal] =
     useState<boolean>(false);
   const [openEditEventModal, setOpenEditEventModal] = useState<boolean>(false);
+  const [eventToEdit, setEventToEdit] = useState<Event>();
 
   useEffect(() => {
     async function loadEventsData() {
@@ -30,7 +31,7 @@ function EventList() {
 
     loadCategoryData();
   }, []);
-  console.log(events)
+
   return (
     <div>
       <Button
@@ -62,14 +63,29 @@ function EventList() {
               hour={event.date.hour}
               minute={event.date.minute}
               category={event.category}
-              onClick={() => setOpenEditEventModal(true)}
+              onClick={() => handleClick(event.id)}
             />
           );
         })}
       </div>
-      <div className="editEvent">{openEditEventModal && <EditEvent />}</div>
+      <div className="editEvent">
+        {openEditEventModal && (
+          <EditEvent
+            headerText={"Edit Event"}
+            nameOfEventToEdit={eventToEdit.name}
+            categoryOfEventToEdit={eventToEdit.category}
+            dateOfEventToEdit={eventToEdit.date}
+            categoryNames={categories.map((category) => category.name)}
+            onCloseWindow={setOpenEditEventModal}
+          />
+        )}
+      </div>
     </div>
   );
+  function handleClick(id: number) {
+    setEventToEdit(events.find((event) => event.id === id));
+    setOpenEditEventModal(true);
+  }
 }
 
 export default EventList;

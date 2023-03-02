@@ -43,41 +43,39 @@ function CreateEvent(props: {
 
   return (
     <div className="modalContainer">
-      <div className="createEvent">
-        <div className="title">
-          <Header heading={props.headerText} />
-        </div>
-        <div className="body">
-          <CreateNewEventForm
-            formClassName={"createEvent"}
-            inputClassName={"input"}
-            typeText={"text"}
-            typeSelect={"select"}
-            typeDatepicker={"datetime-local"}
-            labelName={"Name of Event: "}
-            labelCategory={"Category: "}
-            labelDate={"When: "}
-            onSetName={setName}
-            onSetDate={setDate}
-            onSetCategory={setCategory}
-            name={name}
-            date={date}
-            category={category}
-            categoryNames={props.categoryNames}
-          />
-        </div>
-        <div className="footer">
-          <Button
-            name={props.saveButtonName}
-            className={props.saveButtonName.toLowerCase()}
-            onClick={() => createEvent(name, date, category)}
-          />
-          <Button
-            name={props.cancelButtonName}
-            className={props.cancelButtonName.toLowerCase()}
-            onClick={() => props.onCloseWindow(false)}
-          />
-        </div>
+      <div className="title">
+        <Header heading={props.headerText} />
+      </div>
+      <div className="body">
+        <CreateNewEventForm
+          formClassName={"createEvent"}
+          inputClassName={"input"}
+          typeText={"text"}
+          typeSelect={"select"}
+          typeDatepicker={"datetime-local"}
+          labelName={"Name of Event: "}
+          labelCategory={"Category: "}
+          labelDate={"When: "}
+          onSetName={setName}
+          onSetDate={setDate}
+          onSetCategory={setCategory}
+          name={name}
+          date={date}
+          category={category}
+          categoryNames={props.categoryNames}
+        />
+      </div>
+      <div className="footer">
+        <Button
+          name={props.saveButtonName}
+          className={props.saveButtonName.toLowerCase()}
+          onClick={() => createEvent(name, date, category)}
+        />
+        <Button
+          name={props.cancelButtonName}
+          className={props.cancelButtonName.toLowerCase()}
+          onClick={() => props.onCloseWindow(false)}
+        />
       </div>
     </div>
   );

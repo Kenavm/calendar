@@ -7,5 +7,18 @@
 }
 
 p {
-    margin: 5px;
+   margin: 10px;
+}
+
+.editButton {
+    font-size: 8px;
+    background-color: lightpink;
+    margin-top: 5px;
+}
+
+.editButtonContainer {
+    display: flex;
+    justify-content: end;
+    margin-right: 5px;
+   
 }
