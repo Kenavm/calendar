@@ -14,13 +14,23 @@ function EventList() {
   const [openCreateEventModal, setOpenCreateEventModal] =
     useState<boolean>(false);
   const [openEditEventModal, setOpenEditEventModal] = useState<boolean>(false);
-  const [eventToEdit, setEventToEdit] = useState<Event>();
+  const [eventToEdit, setEventToEdit] = useState<Event>({
+    id: 0,
+    name: "",
+    date: {
+      year: 0,
+      month: 0,
+      day: 0,
+      hour: 0,
+      minute: 0,
+    },
+    category: 0
+  });
 
   useEffect(() => {
     async function loadEventsData() {
       setEvents(await fetchEvents());
     }
-
     loadEventsData();
   }, []);
 
@@ -32,7 +42,7 @@ function EventList() {
     loadCategoryData();
   }, []);
 
-  function handleClick(id: number) {
+  function handleClick(id: number):void {
     setEventToEdit(events.find((event) => event.id === id));
     setOpenEditEventModal(true);
   }
@@ -83,9 +93,9 @@ function EventList() {
               new Date(
                 eventToEdit.date.year,
                 eventToEdit.date.month,
-                eventToEdit?.date.day,
-                eventToEdit?.date.hour,
-                eventToEdit?.date.minute
+                eventToEdit.date.day,
+                eventToEdit.date.hour,
+                eventToEdit.date.minute
               )
             }
             categoryNames={categories.map((category) => category.name)}

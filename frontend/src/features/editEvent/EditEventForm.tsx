@@ -21,7 +21,6 @@ function EditEventForm(props: {
   updatedCategory: string;
 }) {
   function handleDate(dateString: string) {
-  
     const dateObject = new Date(dateString);
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
@@ -38,7 +37,7 @@ function EditEventForm(props: {
     };
     props.onSetUpdatedDate(date);
   }
-console.log(props.updatedDate.toString())
+
   return (
     <form className={props.formClassName}>
       <Label text={props.labelName} />
