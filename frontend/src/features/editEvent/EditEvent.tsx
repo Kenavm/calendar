@@ -35,26 +35,31 @@ function EditEvent(props: {
         name: updatedName,
         category: updatedCategory === "work" ? 2 : 3,
       };
-      
+
       patchEvent(newData, props.id);
-   
+
       eventsWithNewData = props.events.map((event) =>
-        event.id === props.id ? { ...event, newData } : event
+        event.id === props.id ? { ...event, ...newData } : event
       );
-      console.log(eventsWithNewData)
-  
+      console.log(eventsWithNewData);
+
       props.onSetEvents(eventsWithNewData);
       props.onCloseWindow(false);
     } else {
+      let newData = {
+        id: props.id,
+        name: updatedName,
+        date: updatedDate,
+        category: updatedCategory === "work" ? 2 : 3,
+      };
       let eventsWithNewData = props.events.map((event) => {
         if (props.id === event.id) {
           return {
-            event,
-            id: props.id,
-            name: updatedName,
-            date: updatedDate,
-            category: updatedCategory === "work" ? 2 : 3,
+            ...event,
+            ...newData,
           };
+        } else {
+          return event;
         }
       });
       putEvent(
@@ -66,7 +71,7 @@ function EditEvent(props: {
         },
         props.id
       );
-      console.log(eventsWithNewData)
+      console.log(eventsWithNewData);
       props.onSetEvents(eventsWithNewData);
       props.onCloseWindow(false);
     }
