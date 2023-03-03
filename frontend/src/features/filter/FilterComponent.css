@@ -1,0 +1,41 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+.futureEvents {
+    display: flex;
+    margin: 5px;
+}
+
+.to {
+    display: flex;
+    margin: 5px;
+}
+
+.from {
+    display: flex;
+    margin: 5px;
+}
+
+.category {
+    display: flex;
+    margin: 5px;
+}
+
+.filter > div {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .filter > div > *:first-child {
+    margin-right: 10px;
+    width: 100px; /* or any other value that works for your design */
+  }
+
+  .buttonComponent {
+    display: flex;
+  }

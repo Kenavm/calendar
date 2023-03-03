@@ -1,13 +1,19 @@
 .work {
-  background-color: lightcoral;
+  background-color: lightsalmon;
 }
 
 .personal {
-  background-color: lightgreen;
+  background-color: lightcyan;
 }
 
-p {
-  margin: 10px;
+.name {
+    font-weight: bold;
+    margin: 1px;
+}
+
+.time {
+    font-weight: lighter;
+    margin: 1px;
 }
 
 .editButton {

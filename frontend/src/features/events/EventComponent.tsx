@@ -29,8 +29,9 @@ function EventComponent(props: {
           />
         </div>
 
-        <Text text={props.name} />
+        <Text text={props.name} className={"name"}/>
         <Text
+          className="time"
           text={`${props.hour.toString().padStart(2, "0")}h${props.minute
             .toString()
             .padStart(2, "0")}`}

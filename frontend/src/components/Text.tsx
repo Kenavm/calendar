@@ -1,5 +1,5 @@
-function Text(props: {text:string}) {
-    return <p>{props.text}</p>
+function Text(props: {text:string, className?:string}) {
+    return <p className={props.className}>{props.text}</p>
 }
 
 export default Text

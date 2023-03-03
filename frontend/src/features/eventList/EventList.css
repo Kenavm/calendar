@@ -11,8 +11,19 @@
 
 .addButton {
     margin-bottom: 15px;
+    border: 1px solid
 }
 
 .eventListContainer {
     width: 550px;
+}
+
+.filterComponent {
+    position: fixed;
+    left:20px;
+    
+}
+
+.filterFlex {
+    display: flex;
 }
