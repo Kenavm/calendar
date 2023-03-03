@@ -33,14 +33,21 @@ function EventList() {
 
   const [from, setFromDate] = useState<string>();
   const [to, setToDate] = useState<string>();
-
-  async function filterEvents(
-  ) {
-    setEvents(await fetchEvents(from?.substring(0,10), to?.substring(0,10)));
+  const [checked, setChecked] = useState<boolean>();
+  
+  async function filterEvents() {
+    if (checked) {
+      setFromDate("now");
+      setEvents(await fetchEvents(from));
+    } else {
+      setEvents(
+        await fetchEvents(from?.substring(0, 10), to?.substring(0, 10))
+      );
+    }
   }
 
   async function resetList() {
-    setEvents(await fetchEvents())
+    setEvents(await fetchEvents());
   }
 
   useEffect(() => {
@@ -78,6 +85,7 @@ function EventList() {
             onResetEvents={resetList}
             onSetFromDate={setFromDate}
             onSetToDate={setToDate}
+            onSetChecked={setChecked}
             fromDate={from}
             toDate={to}
           />

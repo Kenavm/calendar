@@ -13,6 +13,7 @@ function FilterComponent(props: {
   onSetFromDate: Function;
   onSetToDate: Function;
   onResetEvents: Function;
+  onSetChecked: Function;
 }) {
   return (
     <div className="filter">
@@ -35,7 +36,9 @@ function FilterComponent(props: {
       </div>
       <div className="futureEvents">
         <Text text={"only future events"} />
-        <Input type={"checkbox"} />
+        <Input type={"checkbox"} 
+        onChange={(e) => props.onSetChecked(e.target.checked)}
+        />
       </div>
       <div className="category">
         <Text text={"Category"} />
