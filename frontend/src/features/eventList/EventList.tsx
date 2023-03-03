@@ -7,6 +7,9 @@ import CreateEvent from "../createNewEvent/CreateEvent";
 import fetchCategories from "../../api/fetchCategories";
 import EditEvent from "../editEvent/EditEvent";
 import DateBar from "./DateBar";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from '@fullcalendar/daygrid'
+import './EventList.css'
 
 function EventList() {
   const [events, setEvents] = useState<Array<Event>>([]);
@@ -24,7 +27,7 @@ function EventList() {
       hour: 0,
       minute: 0,
     },
-    category: 0
+    category: 0,
   });
 
   useEffect(() => {
@@ -34,7 +37,6 @@ function EventList() {
     loadEventsData();
   }, []);
 
-
   useEffect(() => {
     async function loadCategoryData() {
       setCategories(await fetchCategories());
@@ -43,13 +45,31 @@ function EventList() {
     loadCategoryData();
   }, []);
 
-  function handleClick(id: number):void {
+  function handleClick(id: number): void {
     setEventToEdit(events.find((event) => event.id === id));
     setOpenEditEventModal(true);
   }
 
   return (
     <div>
+        <div className="calendar">
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          events={events.map((event) => {
+            return {
+              title: event.name,
+              start: new Date(
+                event.date.year,
+                event.date.month,
+                event.date.day,
+                event.date.hour,
+                event.date.minute
+              ),
+              allDay: true,
+            };
+          })}
+        />
+      </div>
       <Button
         name={"Create Event"}
         className={"addButton"}
@@ -69,6 +89,7 @@ function EventList() {
           />
         )}
       </div>
+    
       <div className="events">
         <DateBar />
         {events.map((event) => {
@@ -109,7 +130,6 @@ function EventList() {
       </div>
     </div>
   );
-
 }
 
 export default EventList;

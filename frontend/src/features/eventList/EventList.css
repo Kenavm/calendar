@@ -1,3 +1,10 @@
 .events {
     display: flex;
+    flex-direction: column;
+
+}
+
+.calendar {
+    width: 31.2vw;
+    margin-bottom: 100px;
 }
