@@ -7,26 +7,35 @@ function EventComponent(props: {
   hour: number;
   minute: number;
   category: number;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  editEvent: MouseEventHandler<HTMLButtonElement>;
+  deleteEvent: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <div
-      className={props.category === 2 ? "work" : "personal"}
-      onClick={() => props.onClick}
-    >
-      <div className="editButtonContainer">
-        <Button
-          name={"EDIT"}
-          className={"editButton"}
-          onClick={props.onClick}
+    <div className="event">
+      <div
+        className={props.category === 2 ? "work" : "personal"}
+        onClick={() => props.editEvent}
+      >
+        <div className="buttonContainer">
+          <Button
+            name={"EDIT"}
+            className={"editButton"}
+            onClick={props.editEvent}
+          />
+          <Button
+            name={"DELETE"}
+            className={"deleteButton"}
+            onClick={props.deleteEvent}
+          />
+        </div>
+
+        <Text text={props.name} />
+        <Text
+          text={`${props.hour.toString().padStart(2, "0")}h${props.minute
+            .toString()
+            .padStart(2, "0")}`}
         />
       </div>
-      <Text text={props.name} />
-      <Text
-        text={`${props.hour.toString().padStart(2, "0")}h${props.minute
-          .toString()
-          .padStart(2, "0")}`}
-      />
     </div>
   );
 }

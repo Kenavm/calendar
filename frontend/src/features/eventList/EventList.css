@@ -8,3 +8,11 @@
     width: 31.2vw;
     margin-bottom: 100px;
 }
+
+.addButton {
+    margin-bottom: 15px;
+}
+
+.eventListContainer {
+    width: 550px;
+}

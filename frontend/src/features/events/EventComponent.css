@@ -1,24 +1,32 @@
 .work {
-    background-color: lightcoral;
+  background-color: lightcoral;
 }
 
 .personal {
-    background-color: lightgreen;
+  background-color: lightgreen;
 }
 
 p {
-   margin: 10px;
+  margin: 10px;
 }
 
 .editButton {
-    font-size: 8px;
-    background-color: lightpink;
-    margin-top: 5px;
+  font-size: 8px;
+  background-color: lightskyblue;
+  margin: 5px;
 }
 
-.editButtonContainer {
-    display: flex;
-    justify-content: end;
-    margin-right: 5px;
-   
+.deleteButton {
+  font-size: 8px;
+  background-color: lightpink;
+  margin: 5px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event {
+  margin: 5px;
 }

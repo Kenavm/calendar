@@ -6,10 +6,10 @@ import Button from "../../components/Button";
 import CreateEvent from "../createNewEvent/CreateEvent";
 import fetchCategories from "../../api/fetchCategories";
 import EditEvent from "../editEvent/EditEvent";
-import DateBar from "./DateBar";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid'
 import './EventList.css'
+import {deleteEventRequest} from "../../api/deleteEvent";
 
 function EventList() {
   const [events, setEvents] = useState<Array<Event>>([]);
@@ -50,8 +50,13 @@ function EventList() {
     setOpenEditEventModal(true);
   }
 
+  function deleteEvent(id: number) {
+    setEvents(events.filter(event => event.id !== id))
+    deleteEventRequest(id)
+  }
+
   return (
-    <div>
+    <div className="eventListContainer">
         <div className="calendar">
         <FullCalendar
           plugins={[dayGridPlugin]}
@@ -91,7 +96,6 @@ function EventList() {
       </div>
     
       <div className="events">
-        <DateBar />
         {events.map((event) => {
           return (
             <EventComponent
@@ -100,7 +104,8 @@ function EventList() {
               hour={event.date.hour}
               minute={event.date.minute}
               category={event.category}
-              onClick={() => handleClick(event.id)}
+              editEvent={() => handleClick(event.id)}
+              deleteEvent={() => deleteEvent(event.id)}
             />
           );
         })}
